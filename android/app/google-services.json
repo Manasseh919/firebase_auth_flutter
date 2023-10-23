@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "678770057313",
+    "project_id": "flutterloginregister-ade70",
+    "storage_bucket": "flutterloginregister-ade70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678770057313:android:0a08bca36bf0e9b6050a20",
+        "android_client_info": {
+          "package_name": "com.example.socialmedia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcAflzJZ0kq1kqX_B261y514hsQmNOVQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

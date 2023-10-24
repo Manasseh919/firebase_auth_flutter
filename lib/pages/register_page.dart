@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:socialmedia/components/button.dart';
 import 'package:socialmedia/components/text_field.dart';
@@ -14,6 +15,44 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final confirmPasswordTextController = TextEditingController();
+
+  void singUp() async {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+//to check if passwords match
+    if (passwordTextController.text != confirmPasswordTextController.text) {
+      Navigator.pop(context);
+
+      //showing errors to users when passwords dont match
+      displayMessage("passwords dont match!");
+
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailTextController.text,
+          password: passwordTextController.text);
+
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      displayMessage(e.code);
+    }
+  }
+
+  //displaying error messages to users
+  void displayMessage(String message) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text(message),
+            ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
 
                 //signin button
-                MyButton(onTap: () {}, text: "Sign in"),
+                MyButton(onTap: singUp, text: "Sign Up"),
 
                 SizedBox(
                   height: 25,
@@ -92,7 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
-                        "Sign up",
+                        "Sign In",
                         style: TextStyle(
                             color: Colors.red, fontWeight: FontWeight.bold),
                       ),

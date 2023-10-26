@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:socialmedia/components/button.dart';
 import 'package:socialmedia/components/text_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -15,9 +16,11 @@ class _LoginPageState extends State<LoginPage> {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
 
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+
   //singin method
   void signIn() async {
-//show loading indicator
+// //show loading indicator
     showDialog(
       context: context,
       builder: (context) => const Center(
@@ -26,9 +29,15 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailTextController.text,
-          password: passwordTextController.text);
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: emailTextController.text,
+              password: passwordTextController.text);
+
+      _fireStore.collection("users").doc(userCredential.user!.uid).set({
+        "uid": userCredential.user!.uid,
+        "email": emailTextController.text,
+      }, SetOptions(merge: true));
 
       if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {

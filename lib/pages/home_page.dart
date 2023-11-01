@@ -21,18 +21,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text(
-            'Flutter Demo',
-            style: TextStyle(color: Colors.white),
-          ),
-          actions: [
-            //signout button
-            IconButton(onPressed: signOut, icon: Icon(Icons.logout))
-          ],
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text(
+          'Flutter Demo',
+          style: TextStyle(color: Colors.white),
         ),
-        body: _buildUserList());
+        actions: [
+          //signout button
+          IconButton(onPressed: signOut, icon: Icon(Icons.logout))
+        ],
+      ),
+      body: _buildUserList(),
+      backgroundColor: Colors.grey[400],
+    );
   }
 
   //build a list of users excluding the current logged in user

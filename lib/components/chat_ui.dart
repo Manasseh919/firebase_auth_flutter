@@ -10,7 +10,7 @@ class ChatUi extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.blue,
+        color: Colors.grey,
       ),
       child: Text(
         message,

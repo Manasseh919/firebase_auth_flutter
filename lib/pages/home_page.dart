@@ -22,7 +22,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Flutter Demo'),
+          backgroundColor: Colors.black,
+          title: Text(
+            'Flutter Demo',
+            style: TextStyle(color: Colors.white),
+          ),
           actions: [
             //signout button
             IconButton(onPressed: signOut, icon: Icon(Icons.logout))
